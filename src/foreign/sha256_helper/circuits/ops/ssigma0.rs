@@ -7,6 +7,7 @@ use halo2_proofs::{
     plonk::{ConstraintSystem, Error},
 };
 
+// (x right_rotate 7) ^ (x right_rotate 18) ^ (x >> 3)
 const PARAM: SigmaParam = SigmaParam {
     name: "ssigma0",
     op: Sha256HelperOp::SSigma0,
@@ -15,7 +16,6 @@ const PARAM: SigmaParam = SigmaParam {
 };
 impl<F: FieldExt> Sha256HelperTableConfig<F> {
     pub(crate) fn configure_ssigma0(&self, meta: &mut ConstraintSystem<F>) {
-        // (x right_rotate 7) ^ (x right_rotate 18) ^ (x >> 3)
         self.configure_sigma(meta, PARAM);
     }
 }

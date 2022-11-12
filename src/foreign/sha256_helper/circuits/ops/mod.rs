@@ -70,9 +70,9 @@ impl<F: FieldExt> Sha256HelperTableChip<F> {
 
 #[macro_export]
 macro_rules! rotation_constraints {
-    ($meta:expr, $self:expr, $key:expr, $index:expr, $rotate:expr) => {
+    ($meta:expr, $self:expr, $key:expr, $index:expr, $rotate:expr, $op:expr) => {
         $meta.create_gate($key, |meta| {
-            let enable = $self.is_op_enabled_expr(meta, OP);
+            let enable = $self.is_op_enabled_expr(meta, $op);
 
             let (x, x_lowest) = $self.arg_to_rotate_u32_expr_with_lowest_u4(meta, 0, $rotate / 4);
             let y = $self.arg_to_rotate_u32_expr(meta, $index, 0);
@@ -98,9 +98,9 @@ macro_rules! rotation_constraints {
 
 #[macro_export]
 macro_rules! shift_constraints {
-    ($meta:expr, $self:expr, $key:expr, $index:expr, $rotate:expr) => {
+    ($meta:expr, $self:expr, $key:expr, $index:expr, $rotate:expr, $op:expr) => {
         $meta.create_gate($key, |meta| {
-            let enable = $self.is_op_enabled_expr(meta, OP);
+            let enable = $self.is_op_enabled_expr(meta, $op);
 
             let (x, x_lowest) = $self.arg_to_shift_u32_expr_with_lowest_u4(meta, 0, $rotate / 4);
             let y = $self.arg_to_shift_u32_expr(meta, $index, 0);

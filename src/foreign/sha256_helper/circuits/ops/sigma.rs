@@ -14,6 +14,7 @@ pub struct SigmaParam<'a> {
     pub rotates: &'a [i32],
     pub shifts: &'a [i32],
 }
+
 impl<F: FieldExt> Sha256HelperTableConfig<F> {
     pub(crate) fn configure_sigma(&self, meta: &mut ConstraintSystem<F>, param: SigmaParam) {
         meta.create_gate("sha256 ssigma0 opcode", |meta| {
@@ -53,7 +54,7 @@ impl<F: FieldExt> Sha256HelperTableConfig<F> {
                 "ssigma0 shift 3",
                 i + rlength + 1,
                 param.shifts[i],
-                param.op,
+                param.op
             );
         }
     }
