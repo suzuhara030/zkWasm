@@ -611,6 +611,7 @@ mod tests {
         test_circuit_noexternal(textual_repr).unwrap();
     }
 
+    #[ignore]
     #[test]
     fn test_store_64_cross() {
         let textual_repr = r#"
